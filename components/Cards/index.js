@@ -19,19 +19,35 @@
 // Create a card for each of the articles and add the card to the DOM.
 
 
-const cardsContainer = document.querySelector('.cards-container')
+// const cardsContainer = document.querySelector('.cards-container')
 
 axios.get(`https://lambda-times-backend.herokuapp.com/articles`)
 .then(response => {
     console.log(response.data.articles.javascript)
-        response.data.articles.javascript.forEach(event => {
-        cardsContainer.appendChild(articleCards(event))
+        response.data.articles.javascript.forEach(e => {
+        // cardsContainer.appendChild(articleCards(event))
+            document.querySelector('.cards-container').appendChild(articleCards(e))
+    })
+    response.data.articles.bootstrap.forEach(e => {
+        // cardsContainer.appendChild(articleCards(event))
+            document.querySelector('.cards-container').appendChild(articleCards(e))
+    })
+    response.data.articles.technology.forEach(e => {
+        // cardsContainer.appendChild(articleCards(event))
+            document.querySelector('.cards-container').appendChild(articleCards(e))
+    })
+    response.data.articles.jquery.forEach(e => {
+        // cardsContainer.appendChild(articleCards(event))
+            document.querySelector('.cards-container').appendChild(articleCards(e))
+    })
+    response.data.articles.node.forEach(e => {
+        // cardsContainer.appendChild(articleCards(event))
+            document.querySelector('.cards-container').appendChild(articleCards(e))
     })
 })
 .catch(error => {
     console.log('whoops', error)
 })
-
 
 function articleCards(info) {
     const card = document.createElement('div')
@@ -39,7 +55,13 @@ function articleCards(info) {
         const author = document.createElement('div')
             const imgContainer = document.createElement('div')
                 const img = document.createElement('img')
-            const authorsName = document.createElement('span')
+            const authName = document.createElement('span')
+
+    card.appendChild(headline)
+    card.appendChild(author)
+    author.appendChild(imgContainer)
+    imgContainer.appendChild(img)
+    author.appendChild(authName)
 
     card.classList.add('card')
     headline.classList.add('headline')
@@ -50,7 +72,7 @@ function articleCards(info) {
     
     img.src = info.authorPhoto
 
-    authorsName.textContent = info.authorName
+    authName.textContent = info.authorName
 
     return card
 }
