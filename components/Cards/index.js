@@ -18,6 +18,21 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
+
+const cardsContainer = document.querySelector('.cards-container')
+
+axios.get(`https://lambda-times-backend.herokuapp.com/articles`)
+.then(response => {
+    console.log(response.data.articles.javascript)
+        response.data.articles.javascript.forEach(event => {
+        cardsContainer.appendChild(articleCards(event))
+    })
+})
+.catch(error => {
+    console.log('whoops', error)
+})
+
+
 function articleCards(info) {
     const card = document.createElement('div')
         const headline = document.createElement('div')
@@ -40,12 +55,19 @@ function articleCards(info) {
     return card
 }
 
-// axios.get(`https://lambda-times-backend.herokuapp.com/articles`)
-// .then(response => {
-//     console.log(response.data.articles.javascript)
-//     const cardsContainer = document.querySelector('.cards-container')
-//     cardsContainer.appendChild(articleCards(response.data.articles))
-// })
-// .catch(error => {
-//     console.log('whoops', error)
-// })
+
+// if (response.data.articles.javascript){
+
+    // } else if (response.data.articles.bootstrap){
+    //     console.log(response.data.articles.bootstrap)
+    //     cardsContainer.appendChild(articleCards(response.data.articles.bootstrap))
+    // } else if (response.data.articles.technology){
+    //     console.log(response.data.articles.technology)
+    //     cardsContainer.appendChild(articleCards(response.data.articles.technology))
+    // } else if (response.data.articles.jquery){
+    //     console.log(response.data.articles.jquery)
+    //     cardsContainer.appendChild(articleCards(response.data.articles.jquery))
+    // } else if (response.data.articles.node){
+    //     console.log(response.data.articles.node)
+    //     cardsContainer.appendChild(articleCards(response.data.articles.node))
+    // }
